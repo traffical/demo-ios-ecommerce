@@ -1,0 +1,11 @@
+# Xcode
+xcuserdata/
+DerivedData/
+*.xcuserstate
+build/
+
+# Secrets (the CLI also ignores .traffical/.env)
+.env
+
+.DS_Store
+.claude/

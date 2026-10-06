@@ -1,0 +1,122 @@
+# Traffical config-as-code for the demo store.
+#
+# Parameters and events defined here are synced with `traffical push`. The
+# parameter defaults match `CatalogParams` and `RecommendationParams` in
+# HoldoutStore/Traffical.swift; the events match HoldoutStore/Events.swift.
+# Layers and policies (the A/B tests) are set up in the dashboard.
+# Learn more: https://docs.traffical.io/config-as-code
+
+version: "1.0"
+
+parameters: {}
+
+namespaces:
+  catalog:
+    parameters:
+      title:
+        type: string
+        default: "Shop all"
+        description: Navigation title of the catalog screen.
+      layout:
+        type: string
+        default: "grid"
+        description: How products are laid out on the catalog screen.
+        constraints:
+          allowedValues: ["grid", "list"]
+      sort:
+        type: string
+        default: "featured"
+        description: Product order on the catalog screen.
+        constraints:
+          allowedValues: ["featured", "price_low_to_high"]
+
+  pdp:
+    parameters:
+      recommendations.title:
+        type: string
+        default: "You might also like"
+        description: Heading above the recommendations on the product page.
+      recommendations.strategy:
+        type: string
+        default: "same_category"
+        description: How the product page picks the products to recommend.
+        constraints:
+          allowedValues: ["same_category", "similar_price"]
+      recommendations.count:
+        type: number
+        default: 4
+        description: Number of products recommended on the product page.
+        constraints:
+          min: 0
+          max: 7
+
+events:
+  catalog_view:
+    valueType: count
+    description: The catalog screen was shown.
+    properties:
+      layout:
+        type: string
+        required: true
+        enum: [grid, list]
+        dimension: true
+      sort:
+        type: string
+        required: true
+        enum: [featured, price_low_to_high]
+        dimension: true
+      product_count:
+        type: integer
+        required: true
+      product_ids:
+        type: array
+        description: Product ids in the order they were shown.
+
+  product_view:
+    valueType: count
+    description: A product page was shown.
+    properties:
+      product_id:
+        type: string
+        required: true
+        dimension: true
+      category:
+        type: string
+        required: true
+        dimension: true
+      price:
+        type: number
+        required: true
+      source:
+        type: string
+        required: true
+        enum: [catalog, recommendation]
+        dimension: true
+        description: Where the product was tapped.
+      position:
+        type: integer
+        required: true
+        description: 1-based position in the list the product was tapped in.
+      source_product_id:
+        type: string
+        description: For source = recommendation, the product page it was tapped on.
+
+  recommendation_impression:
+    valueType: count
+    description: A recommended product scrolled into view on a product page.
+    properties:
+      product_id:
+        type: string
+        required: true
+        dimension: true
+      source_product_id:
+        type: string
+        required: true
+      position:
+        type: integer
+        required: true
+      strategy:
+        type: string
+        required: true
+        enum: [same_category, similar_price]
+        dimension: true

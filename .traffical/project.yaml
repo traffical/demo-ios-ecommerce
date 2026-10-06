@@ -1,0 +1,10 @@
+# Traffical project link — managed by `traffical link`.
+# This file records which Traffical project this repo syncs with.
+# Safe to commit. Edit via `traffical link` rather than by hand.
+version: "1.0"
+org:
+  id: org_0uM5pDR6
+  key: traffical
+project:
+  id: proj_11cyay84
+  key: demo-ios-ecommerce

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/traffical/ios-sdk",
+      "state" : {
+        "revision" : "0c034c2bc24e8b47b1aa98ec51529a5ed099c1c6",
+        "version" : "0.8.0"
+      }
+    }
+  ],
+  "version" : 2
+}

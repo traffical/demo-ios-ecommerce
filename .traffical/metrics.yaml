@@ -1,0 +1,46 @@
+# Metrics built from the events in config.yaml. Synced with `traffical push`.
+version: "1.0"
+
+metrics:
+  pdp_view_rate:
+    display_name: Product page view rate
+    description: Share of visitors who open at least one product page.
+    metricType: conversion_rate
+    event: product_view
+    desiredDirection: increase
+
+  product_views:
+    display_name: Product page views per visitor
+    description: Product pages opened per visitor, from anywhere in the app.
+    metricType: count
+    event: product_view
+    desiredDirection: increase
+
+  recommendation_click_rate:
+    display_name: Recommendation click rate
+    description: Share of visitors who open a product from a recommendation.
+    metricType: conversion_rate
+    event: product_view
+    filters:
+      - dimension: source
+        operator: equals
+        values: [recommendation]
+    desiredDirection: increase
+
+  recommendation_clicks:
+    display_name: Recommendation clicks per visitor
+    description: Product pages opened from a recommendation, per visitor.
+    metricType: count
+    event: product_view
+    filters:
+      - dimension: source
+        operator: equals
+        values: [recommendation]
+    desiredDirection: increase
+
+  recommendation_impressions:
+    display_name: Recommendations seen per visitor
+    description: Recommended products scrolled into view, per visitor.
+    metricType: count
+    event: recommendation_impression
+    desiredDirection: increase
