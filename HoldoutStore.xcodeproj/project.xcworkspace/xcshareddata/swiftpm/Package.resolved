@@ -5,7 +5,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/traffical/ios-sdk",
       "state" : {
-        "revision" : "0c034c2bc24e8b47b1aa98ec51529a5ed099c1c6",
+        "revision" : "bc5b6c38164a579df8d5fb2d33f397781642dc24",
         "version" : "0.8.0"
       }
     }
